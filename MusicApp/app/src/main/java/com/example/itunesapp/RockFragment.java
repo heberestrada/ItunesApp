@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.itunesapp.Model.AllMusic;
 import com.example.itunesapp.Model.Music;
 
 import java.io.IOException;
@@ -112,7 +113,7 @@ public class RockFragment extends Fragment {
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                Music songAll= realm.createObject(Music.class);
+                AllMusic songAll= realm.createObject(AllMusic.class);
                 songAll.setSongName(songNameR);
                 songAll.setSogArtist(songArtistR);
                 songAll.setSongPrice(songPriceR);

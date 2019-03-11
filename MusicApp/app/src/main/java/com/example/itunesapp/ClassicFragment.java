@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.itunesapp.Model.Music;
+import com.example.itunesapp.Model.AllMusic;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
@@ -85,7 +85,8 @@ public class ClassicFragment extends Fragment {
                                 response.body().getResults().get(moveOn).getArtistName(),
                                 response.body().getResults().get(moveOn).getTrackPrice().toString(),
                                 response.body().getResults().get(moveOn).getCurrency(),
-                                response.body().getResults().get(moveOn).getPreviewUrl()));
+                                response.body().getResults().get(moveOn).getPreviewUrl()
+                        ));
 
                         saveClassicSongs(response.body().getResults().get(moveOn).getCollectionName(),
                                 response.body().getResults().get(moveOn).getArtistName(),
@@ -108,21 +109,21 @@ public class ClassicFragment extends Fragment {
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                Music songAll= realm.createObject(Music.class);
-                songAll.setSongName(songNameR);
-                songAll.setSogArtist(songArtistR);
+                AllMusic.Classic songAll= realm.createObject(AllMusic.Classic.class);
+                songAll.setSongName(songNameR); ;
+                songAll.setSongArtist(songArtistR);
                 songAll.setSongPrice(songPriceR);
                 songAll.setCurrency(currencyR);
             }
         });
     }
     private void readClassicSongs(){
-        RealmResults <Music> music = realm.where(Music.class).findAll();
-
-        for(Music track : music){
+        RealmResults <AllMusic.Classic> music = realm.where(AllMusic.Classic.class).findAll();
+        classicSongsList.clear();
+        for(AllMusic.Classic track : music){
             classicSongsList.add(new DataListClassic("empty",
                     track.getSongName(),
-                    track.getSogArtist(),
+                    track.getSongArtist(),
                     track.getSongPrice(),
                     track.getCurrency(),
                     "empty"

@@ -76,9 +76,6 @@ public class PopFragment extends Fragment {
                                 response.body().getResults().get(moveOn).getTrackPrice().toString(),
                                 response.body().getResults().get(moveOn).getCurrency(),
                                 response.body().getResults().get(moveOn).getPreviewUrl()));
-
-
-
                     }
                     Toast.makeText(getActivity().getBaseContext(), "Found " + response.body().getResultCount() + " results.", Toast.LENGTH_SHORT).show();
                 }

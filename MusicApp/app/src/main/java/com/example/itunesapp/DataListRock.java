@@ -1,7 +1,5 @@
 package com.example.itunesapp;
 
-import android.graphics.Bitmap;
-
 public class DataListRock {
 
     private String songImage;
