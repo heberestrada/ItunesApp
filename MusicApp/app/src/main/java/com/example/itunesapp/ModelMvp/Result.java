@@ -1,4 +1,4 @@
-package com.example.itunesapp;
+package com.example.itunesapp.ModelMvp;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

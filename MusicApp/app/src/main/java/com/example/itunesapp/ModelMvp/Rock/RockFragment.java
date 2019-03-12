@@ -1,9 +1,5 @@
-package com.example.itunesapp;
+package com.example.itunesapp.ModelMvp.Rock;
 
-import android.content.Context;
-import android.graphics.BitmapFactory;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -14,31 +10,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.itunesapp.MainActivity;
 import com.example.itunesapp.Model.Music;
+import com.example.itunesapp.ModelMvp.Model.RockInterfaceApi;
+import com.example.itunesapp.ModelMvp.Model.RockSongs;
+import com.example.itunesapp.ModelMvp.Presenters.PresenterRock;
+import com.example.itunesapp.R;
 
-import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RockFragment extends Fragment {
 
-    final String BASE_URL = "https://itunes.apple.com";
-    ArrayList<DataListRock> rockSongsList = new ArrayList<>();
-    RecyclerView rockSongsInScreen;
-    int moveOn = 0;
+    public static ArrayList<DataListRock> rockSongsList = new ArrayList<>();
+    public static RecyclerView rockSongsInScreen;
     SwipeRefreshLayout layoutRefresher;
     Realm realm;
     RealmConfiguration realmConf;
-    RockAdapterData adapter = new RockAdapterData(rockSongsList);
+    public static RockAdapterData adapterR = new RockAdapterData(rockSongsList);
+    PresenterRock presenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,6 +42,7 @@ public class RockFragment extends Fragment {
         rockSongsInScreen = v.findViewById(R.id.rockSongs);
         rockSongsInScreen.setLayoutManager(new LinearLayoutManager(getActivity().getBaseContext()));
 
+        presenter= new PresenterRock(adapterR);
         Realm.init(getActivity().getBaseContext());
         realmConf = new RealmConfiguration.Builder().build();
 
@@ -70,42 +65,6 @@ public class RockFragment extends Fragment {
         return v;
     }
 
-    public void initializeRetrofitRock() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        RockInterfaceApi interfaceApi = retrofit.create(RockInterfaceApi.class);
-        interfaceApi.getRockSongs().enqueue(new Callback<RockSongs>() {
-            @Override
-            public void onResponse(Call<RockSongs> call, Response<RockSongs> response) {
-                if (response.body() != null) {
-
-                    rockSongsList.clear();
-                    for (moveOn = 0; moveOn < response.body().getResultCount(); moveOn++) {
-                        rockSongsList.add(new DataListRock(
-                                response.body().getResults().get(moveOn).getArtworkUrl60(),
-                                response.body().getResults().get(moveOn).getCollectionName(),
-                                response.body().getResults().get(moveOn).getArtistName(),
-                                response.body().getResults().get(moveOn).getTrackPrice().toString(),
-                                response.body().getResults().get(moveOn).getCurrency(),
-                                response.body().getResults().get(moveOn).getPreviewUrl()));
-                        saveRockSongs(response.body().getResults().get(moveOn).getCollectionName(),
-                                response.body().getResults().get(moveOn).getArtistName(),
-                                response.body().getResults().get(moveOn).getTrackPrice().toString(),
-                                response.body().getResults().get(moveOn).getCurrency());
-                    }
-                    Toast.makeText(getActivity().getBaseContext(), "Found " + response.body().getResultCount() + " results.", Toast.LENGTH_SHORT).show();
-                }
-                rockSongsInScreen.setAdapter(adapter);
-            }
-
-            @Override
-            public void onFailure(Call<RockSongs> call, Throwable t) {
-
-            }
-        });
-    }
 
     private void saveRockSongs(final String songNameR,final String songArtistR,final String songPriceR,final String currencyR){
 
@@ -130,18 +89,20 @@ public class RockFragment extends Fragment {
                     track.getCurrency(),
                     "empty"
             ));
-            Toast.makeText(getActivity().getBaseContext(), "Offline Mode!", Toast.LENGTH_SHORT).show();
         }
-        rockSongsInScreen.setAdapter(adapter);
+
     }
+
     public  boolean CheckConnection() {
 
         try {
             InetAddress ipAddr = InetAddress.getByName("google.com");
-            initializeRetrofitRock();
+
+            presenter.initializeRockRetrofit();
+
             return !ipAddr.equals("connected");
         } catch (Exception e) {
-            readRockSongs();
+           // readRockSongs();
             e.printStackTrace();
             return false;
         }

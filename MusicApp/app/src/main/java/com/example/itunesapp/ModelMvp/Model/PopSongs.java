@@ -1,6 +1,8 @@
-package com.example.itunesapp;
+package com.example.itunesapp.ModelMvp.Model;
 
 import java.util.List;
+
+import com.example.itunesapp.ModelMvp.Result;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

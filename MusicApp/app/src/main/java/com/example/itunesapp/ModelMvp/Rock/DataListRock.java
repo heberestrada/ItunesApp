@@ -1,4 +1,4 @@
-package com.example.itunesapp;
+package com.example.itunesapp.ModelMvp.Rock;
 
 import android.graphics.Bitmap;
 

@@ -6,6 +6,10 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.itunesapp.ModelMvp.Classic.ClassicFragment;
+import com.example.itunesapp.ModelMvp.Pop.PopFragment;
+import com.example.itunesapp.ModelMvp.Rock.RockFragment;
+
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 

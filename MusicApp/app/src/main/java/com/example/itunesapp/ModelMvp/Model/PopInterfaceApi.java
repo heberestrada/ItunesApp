@@ -1,7 +1,6 @@
-package com.example.itunesapp;
+package com.example.itunesapp.ModelMvp.Model;
 
 import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.http.GET;
 
 public interface PopInterfaceApi {

@@ -1,9 +1,8 @@
-package com.example.itunesapp;
+package com.example.itunesapp.ModelMvp.Pop;
 
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,14 +10,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.itunesapp.ModelMvp.Views.ViewControllerPop;
+import com.example.itunesapp.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class PopAdapterData extends RecyclerView.Adapter<PopAdapterData.ViewHolderData> {
+import static com.example.itunesapp.ModelMvp.Pop.PopFragment.adapterP;
+import static com.example.itunesapp.ModelMvp.Pop.PopFragment.popSongsInScreen;
+
+public class PopAdapterData extends RecyclerView.Adapter<PopAdapterData.ViewHolderData> implements ViewControllerPop {
 
 
-    ArrayList<DataListPop> popList;
+    public static ArrayList<DataListPop> popList;
+    public String Base_Url="https://itunes.apple.com";
 
     public PopAdapterData(ArrayList<DataListPop> popList) {
         this.popList = popList;
@@ -44,6 +49,21 @@ public class PopAdapterData extends RecyclerView.Adapter<PopAdapterData.ViewHold
     @Override
     public int getItemCount() {
         return popList.size();
+    }
+
+    @Override
+    public void PopulateData(String songImage, String songName, String songArtist, String songPrice, String currency, String preview) {
+        popSongsInScreen.setAdapter(adapterP);
+    }
+
+    @Override
+    public String getBaseUrl() {
+        return Base_Url;
+    }
+
+    @Override
+    public void showError(String errorMessage) {
+
     }
 
     public class ViewHolderData extends RecyclerView.ViewHolder {

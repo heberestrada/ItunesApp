@@ -1,7 +1,6 @@
-package com.example.itunesapp;
-import android.graphics.Bitmap;
+package com.example.itunesapp.ModelMvp.Classic;
 
-public class DataListPop {
+public class DataListClassic {
 
     private String songImage;
     private String songName;
@@ -10,7 +9,7 @@ public class DataListPop {
     private String currency;
     private String preview;
 
-    public DataListPop(String songImage, String songName, String songArtist, String songPrice, String currency, String preview) {
+    public DataListClassic(String songImage, String songName, String songArtist, String songPrice, String currency, String preview) {
         this.songImage = songImage;
         this.songName = songName;
         this.songArtist = songArtist;
@@ -43,5 +42,6 @@ public class DataListPop {
     public String getPreview() {
         return preview;
     }
+
 
 }
