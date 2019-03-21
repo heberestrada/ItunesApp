@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new ClassicFragment(), "Classic");
         adapter.addFragment(new PopFragment(), "Pop");
         viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager,false);
+        tabLayout.setupWithViewPager(viewPager,true);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);

@@ -29,7 +29,7 @@ public class PopFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_pop, null);
+        View v = inflater.inflate(R.layout.fragment_pop,null);
 
         popSongsInScreen=v.findViewById(R.id.popSongs);
         popSongsInScreen.setLayoutManager(new LinearLayoutManager(getActivity().getBaseContext()));
@@ -50,4 +50,5 @@ public class PopFragment extends Fragment {
 
         return v;
     }
+
 }

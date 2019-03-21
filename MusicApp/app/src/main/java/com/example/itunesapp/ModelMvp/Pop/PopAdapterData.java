@@ -31,7 +31,7 @@ public class PopAdapterData extends RecyclerView.Adapter<PopAdapterData.ViewHold
 
     @Override
     public ViewHolderData onCreateViewHolder(ViewGroup parent, int i) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_songs_layout,null,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_songs_layout,parent,false);
         return new ViewHolderData(view);
     }
 

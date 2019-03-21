@@ -40,6 +40,7 @@ public class ClassicFragment extends Fragment {
 
         layoutRefresher = v.findViewById(R.id.swipe_container);
         classicSongsInScreen = v.findViewById(R.id.classicSongs);
+        classicSongsInScreen.setHasFixedSize(true);
         classicSongsInScreen.setLayoutManager(new LinearLayoutManager(getActivity().getBaseContext()));
         presenterClassic=new PresenterClassic(adapterC);
 
@@ -63,7 +64,6 @@ public class ClassicFragment extends Fragment {
         );
         return v;
     }
-
 
     private void saveClassicSongs(final String songNameR,final String songArtistR,final String songPriceR,final String currencyR){
         realm.executeTransactionAsync(new Realm.Transaction() {

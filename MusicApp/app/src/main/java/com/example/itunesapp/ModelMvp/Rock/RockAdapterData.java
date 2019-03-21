@@ -30,7 +30,7 @@ public class RockAdapterData extends RecyclerView.Adapter<RockAdapterData.ViewHo
 
     @Override
     public ViewHolderData onCreateViewHolder(ViewGroup parent, int i) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_songsr_layout,null,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_songsr_layout,parent,false);
         return new ViewHolderData(view);
     }
 

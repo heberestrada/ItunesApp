@@ -30,7 +30,7 @@ public class ClassicAdapterData extends RecyclerView.Adapter<ClassicAdapterData.
 
     @Override
     public ViewHolderData onCreateViewHolder(ViewGroup parent, int i) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_songsc_layout,null,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_songsc_layout,parent,false);
         return new ViewHolderData(view);
     }
 
@@ -85,5 +85,4 @@ public class ClassicAdapterData extends RecyclerView.Adapter<ClassicAdapterData.
             });
         }
     }
-
 }
